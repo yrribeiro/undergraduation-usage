@@ -1,0 +1,38 @@
+/* faça um programa que recebe um número no formato de string e informa o tipo do número fornecido (natural, inteiros ou real). 
+   Existe a possibilidade do número fornecidos não ser válido para nenhum desses tipos, caso em que uma mensagem de erro deve ser exibida para o usuário
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int is_digit (char string[]);
+
+int main (){
+    double inumber=0, isdecimal=0;
+    char snumber[10];
+
+    scanf("%s", snumber);
+    if (!(is_digit(snumber))){
+        printf("Only numbers. Try again\n");
+    }else{
+        inumber = atof(snumber);
+        isdecimal = inumber - (int)inumber;
+        if (isdecimal){
+            printf("REAL\n");
+        }else if(inumber>=0){
+            printf("NATURAL\n");
+        }else{
+            printf("INTEIRO\n");
+        }
+    }
+    return 0;
+} 
+
+int is_digit (char string[]){
+    int i=0, yes=0;
+    while (string[i]!='\0'){
+        (string[i]!=45 && (string[i]<48 || string[i]>57)) ? yes++ : yes--; // ascii -> 48 to 57 is 0 to 9; 45 is (-)
+        i++;
+    }
+    return yes;
+}
