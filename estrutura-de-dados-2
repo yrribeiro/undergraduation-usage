@@ -8,21 +8,21 @@
 int is_digit (char string[]);
 
 int main (){
-    double inumber=0, isdecimal=0;
-    char snumber[10];
+    double fnumber=0, isdecimal=0;
+    char snumber[10000];
 
     scanf("%s", snumber);
     if (!(is_digit(snumber))){
         printf("Only numbers. Try again\n");
     }else{
-        inumber = atof(snumber);
-        isdecimal = inumber - (int)inumber;
+        fnumber = atof(snumber);
+        isdecimal = fnumber - (int)fnumber;
         if (isdecimal){
             printf("REAL\n");
-        }else if(inumber>=0){
-            printf("NATURAL\n");
+        }else if(fnumber>=0){
+            printf("NATURAL, INTEIRO E REAL\n");
         }else{
-            printf("INTEIRO\n");
+            printf("INTEIRO E REAL\n");
         }
     }
     return 0;
