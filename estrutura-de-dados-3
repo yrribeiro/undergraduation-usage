@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int is_digit (char string[]);
+void write (int mil, int cen, int dez, int uni);
+
+int main (){
+    double fnumber=0, isdecimal=0;
+    char snumber[10000];
+
+    scanf("%s", snumber);
+    if (!(is_digit(snumber))){
+        printf("Only numbers. Try again\n");
+    }else{
+        fnumber = atof(snumber);
+        isdecimal = fnumber - (int)fnumber;
+        if (isdecimal){
+            //real
+        }else if(fnumber>=0){
+            double aux = fnumber/100;
+            int dez = ((int)aux - aux)*10;
+            double mil = fnumber/1000;
+            int cen = ((int)mil - mil)*10;
+            aux = fnumber/10;
+            int uni = ((int)aux - aux)*10;
+            write((int)mil, cen, dez, uni);
+        }else{
+            //inteiro
+        }
+    }
+    return 0;
+} 
+
+int is_digit (char string[]){
+    int i=0, yes=0;
+    while (string[i]!='\0'){
+        (string[i]!=45 && (string[i]<48 || string[i]>57)) ? yes++ : yes--; // ascii -> 48 to 57 is 0 to 9; 45 is (-)
+        i++;
+    }
+    return yes;
+}
+
+void write (int mil, int cen, int dez, int uni){
+    char dict_mil[9][10]{
+        "Mil", "Dois mil",
+        "Três mil", "Quatro mil",
+        "Cinco mil", "Seis mil",
+        "Sete mil", "Oito mil",
+        "Nove mil"
+    }
+
+    char dict_cen[9][12]{
+        "Cento", "Duzentos",
+        "Trezentos", "Quatrocentos",
+        "Quinhentos", "Seiscentos",
+        "Setecentos", "Oitocentos",
+        "Novecentos"
+    }
+
+    char dict_dez[9][9]{
+        "Vinte", "Trinta",
+        "Quarenta", "Cinquenta",
+        "Sessenta", "Setenta",
+        "Oitenta", "Noventa"
+    }
+
+    char dict_OnlyDez[9][9]{
+        "Dez", "Onze",
+        "Doze", "Treze",
+        "Quatorze", "Quinze",
+        "Dezesseis", "Dezessete",
+        "Dezoito", "Dezenove"
+    }
+
+    char dict_uni[10][9]{
+        "Zero", "Um",
+        "Dois", "Três",
+        "Quatro", "Cinco",
+        "Seis", "Sete",
+        "Oito", "Nove"
+    }
+}
