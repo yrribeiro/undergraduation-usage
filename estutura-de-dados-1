@@ -17,7 +17,7 @@ int main (){
     scanf("%s", name);
     for(i=0; name[i] != '\0'; i++){
         if (i==0){
-            if (!(name[i] >= 65 && name[i] <= 92)){
+            if (!(name[i]>=65 && name[i]<=92)){
                 printf("Invalid first character. Try again\n");
                 break;
             }
