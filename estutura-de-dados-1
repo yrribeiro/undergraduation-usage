@@ -1,3 +1,9 @@
+/* faça um programa que receba um nome válido
+        para efeitos de teste, os nomes válidos são formados só por letra
+        não existe a possibilidade de um nome ter zero caracteres
+        o campo não deve permitir que a string inicie com uma letra minúscula nem com espaço
+ */
+
 #include <stdio.h>
 #include <string.h>
 
