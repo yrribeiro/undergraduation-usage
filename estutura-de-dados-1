@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+// ascii table reference -> uppercase 65 to 90. lowercase 97 to 122
+int isalphab (char letter);
+
+int main (){
+    int i, validLetter=0;
+    char name[60];
+
+    scanf("%s", name);
+    for(i=0; name[i] != '\0'; i++){
+        if (i==0){
+            if (!(name[i] >= 65 && name[i] <= 92)){
+                printf("Invalid first character. Try again\n");
+                break;
+            }
+        }else{
+           if (isalphab(name[i])){
+               validLetter++;
+           }else{
+               printf("Invalid character. Try again\n");
+               break;
+           }
+        }
+    }
+    if (validLetter+1 == strlen(name)) printf("NICE NAME\n");
+    return 0;
+}
+
+int isalphab (char letter){
+    if ((letter>=65 && letter<=90) || (letter>=97 && letter<=122)){
+        return 1;
+    }else{
+        return 0;
+    }
+}
