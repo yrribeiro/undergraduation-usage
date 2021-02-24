@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0  | YANKA
 int is_digit (char string[]);
 
 int main (){
