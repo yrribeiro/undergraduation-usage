@@ -20,9 +20,9 @@ int main (){
         if (isdecimal){
             printf("REAL\n");
         }else if(fnumber>=0){
-            printf("NATURAL, INTEIRO E REAL\n");
+            printf("NATURAL\n");
         }else{
-            printf("INTEIRO E REAL\n");
+            printf("INTEIRO\n");
         }
     }
     return 0;
