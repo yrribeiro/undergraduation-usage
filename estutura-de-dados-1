@@ -35,5 +35,7 @@ int main (){
 }
 
 int isalphab (char letter){
-    ((letter>=65 && letter<=90) || (letter>=97 && letter<=122)) ? return 1 : return 0;
+    if ((letter>=65 && letter<=90) || (letter>=97 && letter<=122)){
+        return 1;
+    }else return 0;
 }
