@@ -30,7 +30,7 @@ int main (){
            }
         }
     }
-    if (validLetter+1 == strlen(name)) printf("NICE NAME\n");
+    if (validLetter+1 == strlen(name) && strlen(name)>1) printf("NICE NAME\n");
     return 0;
 }
 
