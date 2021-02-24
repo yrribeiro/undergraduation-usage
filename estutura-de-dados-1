@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
-// ascii table reference -> uppercase 65 to 90. lowercase 97 to 122 | GCC 
+// ascii table reference -> uppercase 65 to 90. lowercase 97 to 122 | gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 
 int isalphab (char letter);
 
 int main (){
