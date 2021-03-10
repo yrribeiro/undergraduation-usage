@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void printnacci (int tot, int i, int n0, int n1, int n2);
+void printnacci (int tot, int i, long long int n0, long long int n1, long long int n2);
 
 int main (){
     int tot;
@@ -11,13 +11,13 @@ int main (){
     return 0;
 }
 
-void printnacci (int tot, int i, int n0, int n1, int n2){
+void printnacci (int tot, int i, long long int n0, long long int n1, long long int n2){
     if (i==tot){
         printf("\n");
         return;
     }else{
         n2 = n1+n0;
-        printf("%d ", n2);
+        printf("%lld ", n2);
         n0=n1;
         n1=n2;
         return printnacci(tot, i+1, n0, n1, n2);
