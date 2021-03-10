@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+void printnacci (int tot, int i, int n0, int n1, int n2);
+
+int main (){
+    int tot;
+    printf("-- Digite o tamanho da série: ");
+    scanf("%d", &tot);
+    printf("\n============================\n");
+    printnacci(tot, 0, 1, 0, 0);
+    return 0;
+}
+
+void printnacci (int tot, int i, int n0, int n1, int n2){
+    if (i==tot){
+        printf("\n");
+        return;
+    }else{
+        n2 = n1+n0;
+        printf("%d ", n2);
+        n0=n1;
+        n1=n2;
+        return printnacci(tot, i+1, n0, n1, n2);
+    }
+}
