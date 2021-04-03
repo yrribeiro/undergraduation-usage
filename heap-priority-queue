@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX 100
+//                                                    --- gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 ---
+    
+typedef struct node{
+    int pswd;
+    int priori;
+}node;
+
+typedef struct queue{
+    int size;
+    node *heap[MAX];
+}queue;
+
+queue * create ();
+void enqueue (queue *q, int pri, int pas);
+int getRootIndex (int i);
+int getRightIndex (int i);
+int getLeftIndex (int i);
+void swap (node *a, node *b);
+void display (queue *q);
+node * dequeue (queue *q);
+void max_heapify (queue *q, int i);
+
+int main(){
+    queue *q = create();
+    int op, pas, pri;
+
+    while (1){
+        puts("[0 to quit]\n1 = NEW\n2 = SHOW\n3 = REMOVE");
+        scanf("%d", &op);
+        if (op==1){ 
+            if (q->size+1>MAX){
+                puts("=== full queue ===");
+            }else{
+                puts("======\nPriority:");
+                scanf("%d", &pri);
+                puts("Password [integer]:");
+                scanf("%d", &pas);
+                enqueue(q, pri, pas);
+                printf("\n================= ADDED SUCCESSFULLY");
+            }
+        }else if (op==2){
+            puts("");
+            display(q);
+        }else if (op==3){
+            if (q->size==-1){
+                puts("=== empty queue ===");
+            }else{
+                node *aux = dequeue(q);
+                printf("============= CALL PASSWORD [%d], Priority [%d]", aux->pswd, aux->priori);
+            }
+        }else break;
+        puts("\n\n");
+    }
+    return 0;
+}
+
+queue * create (){
+    queue * new = (queue*)malloc(sizeof(queue));
+    new->size = -1;
+    for (int i=0; i<MAX; i++){
+        new->heap[i] = (node*)malloc(sizeof(node));
+        new->heap[i]->priori = -1;
+        new->heap[i]->pswd = -1;
+    }
+    return new;
+}
+
+void enqueue (queue *q, int pri, int pas){
+    int leafIndex, rootIndex;
+    q->heap[++q->size]->priori = pri;
+    q->heap[q->size]->pswd = pas;
+    leafIndex = q->size;
+    rootIndex = getRootIndex(q->size);
+    while (rootIndex>=0 && q->heap[leafIndex]->priori > q->heap[rootIndex]->priori){
+        swap(q->heap[leafIndex], q->heap[rootIndex]);
+        leafIndex = rootIndex;
+        rootIndex = getRootIndex(leafIndex);
+    }
+}
+
+int getRootIndex (int i){
+    return (i-1)/2;
+}
+
+void swap (node *a, node *b){
+    node aux;
+    aux = *a;
+    *a = *b;
+    *b = aux;
+}
+
+void display (queue *q){
+    int i;
+    if (q->size!=-1){
+        for (i=0; i<q->size+1; i++) printf("PRIORITY [%d] - PASSWORD [%d]\n", q->heap[i]->priori, q->heap[i]->pswd);
+    }else puts("=== empty queue ===");
+}
+
+node * dequeue (queue *q){
+    node *dequeued;
+    int i;
+    dequeued = q->heap[0];
+    q->heap[0] = q->heap[q->size--];
+    max_heapify(q, 0);
+    return dequeued;
+}
+
+void max_heapify (queue *q, int i){
+    int largestIndex = i;
+    int rightChild = getRightIndex(i), leftChild = getLeftIndex(i);
+    if (leftChild<=q->size && q->heap[leftChild]->priori > q->heap[i]->priori){
+        largestIndex = leftChild;
+    }
+    if (rightChild<=q->size && q->heap[rightChild]->priori > q->heap[i]->priori){
+        largestIndex = rightChild;
+    }
+    if (q->heap[largestIndex] != q->heap[i]){
+        swap(q->heap[largestIndex], q->heap[i]);
+        max_heapify(q, largestIndex);
+    }
+}
+
+int getRightIndex (int i){
+    return (2*i)+2;
+}
+
+int getLeftIndex (int i){
+    return (2*1)+1;
+}
