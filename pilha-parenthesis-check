@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct stack{
+    char paren;
+    struct stack *next;
+}stack;
+                //----------------------------> gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)
+void display (stack *top);
+/*int matchPair (char wasTop, char userInput)*/ // possible function, not in use
+stack *push (stack *top, int new);
+stack *pop (stack *top, char input);
+
+
+int main(){
+    int tam, i=0, error=-1;
+    int left=0;
+    stack *top=NULL;
+    char *input = malloc(sizeof(char));
+
+    printf("Insert your string: ");
+    scanf("%s", input);
+    getchar();
+    tam = strlen(input);
+    while (i<tam){
+        if (input[i]=='('){
+            left++;
+            top = push(top, input[i]);
+        }else if (input[i]==')'){
+            top = pop(top, input[i]); 
+        }
+        i++;
+    }
+    if (input[0]==')'){
+        error = 0;
+    }
+    if (input[tam-1]=='('){
+        error = tam-1;
+    }
+    //display(top);
+    printf("lefts: %d\n", left);
+    if (top==NULL && error<0){
+        printf("balanced\n");
+    }else{
+        (error!=-1) ? printf("not balanced. error at %d\n", error): puts("not balanced.");
+    }
+    return 0;
+}
+
+void display (stack *top){
+    stack *aux;
+    aux = top;
+    while (aux!=NULL){
+        printf("%c ", aux->paren);
+        aux = aux->next;
+    }
+}
+
+stack *pop (stack *top, char input){
+    char res;
+    if (top==NULL){
+        printf("Error - cannot remove from an empty stack!\n");
+    }else{
+        top = top->next;
+        return top;
+    }
+    
+}
+
+stack *push (stack *top, int new){
+    stack *newnode = malloc(sizeof(stack));
+    if (newnode==NULL){
+        puts("Error - unable to allocate memory!");
+    }else{
+        newnode->paren = new;
+        newnode->next = top;
+        top = newnode;
+    }
+    return top;
+}
+
+/*int matchPair (char wasTop, char userInput){
+    puts("ENTROU");
+    if (wasTop=='(' && userInput==')'){
+        return 1;
+    }else{
+        return 0;
+    }
+}*/
