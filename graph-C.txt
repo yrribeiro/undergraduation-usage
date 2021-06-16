@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 6
+
+typedef struct node{
+    int item;
+    struct node *next;
+}node;
+
+typedef struct graph{
+    struct node *vertices[MAX_SIZE];
+    short visited[MAX_SIZE];
+}graph;
+
+graph * createGraph ();
+void createEdge (graph *g, int v1, int v2);
+node * createNode (int item);
+void printGraph (graph *g);
+void dfs (graph *g, int src);
+//void bfs (graph *g, int src);
+
+int main(){
+    graph *myGraph = createGraph();
+    createEdge(myGraph, 0, 1);
+    createEdge(myGraph, 1, 2);
+    createEdge(myGraph, 0, 3);
+    createEdge(myGraph, 3, 4);
+
+    printGraph(myGraph);
+
+    // depth first search
+    puts("--- Nodes visited in DFS order ---");
+    dfs(myGraph, 0);
+    // breadth first search
+    puts("\n--- Nodes visited in BFS order ---");
+    //WORK IN PROGRESS     bfs(myGraph, 0);
+    return 0;
+}
+
+graph * createGraph (){
+    int i;
+    graph *newGraph = (graph*)malloc(sizeof(graph));
+    for (i=0; i<MAX_SIZE; i++){
+        newGraph->vertices[i] = NULL;
+        newGraph->visited[i] = 0;
+    }
+    return newGraph;
+}
+
+void createEdge (graph *g, int v1, int v2){
+    node *vertex = createNode(v2);
+    vertex->next = g->vertices[v1];
+    g->vertices[v1] = vertex;
+    // undirected graph
+    vertex = createNode(v1);
+    vertex->next = g->vertices[v2];
+    g->vertices[v2] = vertex;
+}
+
+node * createNode (int item){
+    node *newNode = (node*)malloc(sizeof(node));
+    newNode->item = item;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void printGraph (graph *g){
+    int i=0;
+    node *aux;
+    while (i<MAX_SIZE){
+        aux = g->vertices[i];
+        printf("[%d]-> ", i);
+        while(aux){
+            printf("[%d]-> ", aux->item);
+            aux = aux->next;
+        }
+        puts("::");
+        i++;
+    }
+}
+
+void dfs (graph *g, int src){
+    node *aux = g->vertices[src];
+    g->visited[src] = 1;
+    printf("[%d] ", src);
+    while (aux!=NULL){
+        if (!g->visited[aux->item]) dfs(g, aux->item);
+        aux = aux->next;
+    }
+}

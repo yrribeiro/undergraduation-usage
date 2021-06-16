@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define COUNT 10
+//                                                    --- gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0 ---
+typedef struct node{
+    int item;
+    struct node *leftNode;
+    struct node *rightNode;
+}node;
+
+void handleMenu ();
+node * create ();
+node * insert (node *root, int new);
+//void display_oneLineMode (node *t);
+void display_bidimensional(node *root, int space);
+int getHeight (node *r, int left, int right);
+node * rotateRight (node *r);
+node * rotateLeft (node *r);
+int getbalFactor (node *r, int left, int right);
+
+
+int main (){
+    node *myNode = NULL, *auxN = create();
+    int new, bF;
+    
+    handleMenu();
+    while(scanf("%d", &new)!=EOF){
+        myNode = insert(myNode, new);
+        puts("Sucessfull insertion...");
+        display_bidimensional(myNode, 0);
+        bF = getbalFactor(myNode, -1, -1);
+        if (bF<-1 || bF>1){
+            puts("- - - - - Unbalanced");
+            if (bF>1){
+                bF = getbalFactor(myNode->leftNode, -1, -1);
+                if (bF==-1){
+                    myNode->leftNode = rotateLeft(myNode->leftNode);
+                }
+                myNode = rotateRight(myNode);
+            }else if (bF<-1){
+                bF = getbalFactor(myNode->rightNode, -1, -1);
+                if (bF==1){
+                    myNode->rightNode = rotateRight(myNode->rightNode);
+                }
+                myNode = rotateLeft(myNode);
+            }
+            puts("- - - - - To be balanced:");
+            display_bidimensional(myNode, 0);
+        }else{
+            puts("--- balanced ---");
+        }    
+        handleMenu();
+    }
+    return 0;
+}
+
+node * create (){
+    node *new = (node*)malloc(sizeof(node));
+    new->item = -1;
+    new->leftNode = NULL;
+    new->rightNode = NULL;
+    return new;
+}
+
+void handleMenu (){
+    puts("|---------------------------------|");
+    puts("|       Insert a new member       |");
+    puts("|---------------------------------|");
+}
+
+node * insert (node *root, int new){
+    if (root==NULL){
+        root = create();
+        root->item = new;
+        root->leftNode = NULL;
+        root->rightNode = NULL;
+    }else{
+        if (new < root->item || new == root->item){
+            root->leftNode = insert(root->leftNode, new);
+        }else{
+            root->rightNode = insert(root->rightNode, new);
+        }
+    }
+}
+
+/*void display_oneLineMode (node *t){
+    if (t==NULL){
+        printf("(NULL)");
+    }else{
+        printf("(");
+        printf("%d, ", t->item);
+        display_oneLineMode(t->leftNode);
+        printf(",");
+        display_oneLineMode(t->rightNode);
+        printf(")");
+    }
+}*/
+
+void display_bidimensional (node *root, int space){
+    if (root == NULL){
+        return;
+    }else{
+        space+=COUNT;
+        display_bidimensional(root->rightNode, space);
+        puts("");
+        for (int i=COUNT; i<space; i++) printf(" ");
+        printf("%d\n", root->item);
+        display_bidimensional(root->leftNode, space);
+    }
+}
+
+int getHeight (node *r, int left, int right){
+    while (r!=NULL){
+        left = getHeight(r->leftNode, left, right) + 1;
+        right = getHeight(r->rightNode, left, right) + 1;
+        return (left>right) ? left : right;
+    }
+    return -1;
+}
+
+int getbalFactor (node *r, int left, int right){
+    return getHeight(r->leftNode, -1, -1) - getHeight(r->rightNode, -1, -1);
+}
+
+node * rotateRight (node *r){
+    node * aux = r->leftNode;
+    r->leftNode = aux->rightNode;
+    aux->rightNode = r;
+    return aux;
+}
+
+node * rotateLeft (node *r){
+    node * aux = r->rightNode;
+    r->rightNode = aux->leftNode;
+    aux->leftNode = r;
+    return aux;    
+}
