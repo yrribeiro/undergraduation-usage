@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <time.h>
+
+long long int recursiveFibonacci(int n);
+void callRecursiveFibonacci(int n, int i);
+
+int main (){
+    time_t start, end;
+    double executionTime;
+    int n = 47;
+
+    start = time(NULL);
+    callRecursiveFibonacci(n, 1);
+    end = time(NULL);
+    executionTime = (double)end-start;
+    printf("\nExecution time: %.7lf\n", executionTime);
+    return 0;
+}
+
+void callRecursiveFibonacci(int n, int i){
+    if (i<=n){
+        printf("%lld\n", recursiveFibonacci(i));
+    }else{
+        return;
+    }
+    callRecursiveFibonacci(n, i+1);
+}
+
+long long int recursiveFibonacci(int n){
+    if (n<=1)
+        return n;
+    return (recursiveFibonacci(n-1) + recursiveFibonacci(n-2));
+}
