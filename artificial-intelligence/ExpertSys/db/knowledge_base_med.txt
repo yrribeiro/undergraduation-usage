@@ -1,0 +1,17 @@
+fatigue-COVID19
+fatigue-STRESS
+fatigue-TONSILITIS
+fatigue-INFECTIOUS_MONONUCLEOSIS
+soreThroat-TONSILITIS
+soreThroat-COVID19
+soreThroat-FLU
+headache-COVID19
+headache-FLU
+headache-INFECTIOUS_MONONUCLEOSIS
+cough-COVID19
+cough-FLU
+bodyache-COVID19
+highBloodPressure-COVID19
+lowOxygen-COVID19
+lossSmell-COVID19
+lossTaste-COVID19
