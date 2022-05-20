@@ -84,19 +84,19 @@ public class CheckCreditRisk {
         }
 
         if (answerList[0] == 2){
-            if (answerList[2] == 1 && answerList[3] == 1){
-                // triggered rule2 = IF medium income AND has bachelor degree AND has job THEN loan approved
-                returnal = "* Loan approved *";
-            }else if (answerList[2] == 2 && answerList[3] == 2){
+            if (answerList[2] == 2 && answerList[3] == 2){
                 // triggered rule4 = IF medium income AND hasnt degree and hasnt job THEN loan not approved
                 returnal = "{!} Not approved. REASON: You dont have a job, neiter a degree and not enough income.";
+            }else if (answerList[2] == 1 && answerList[3] == 1){
+                // triggered rule2 = IF medium income AND has bachelor degree AND has job THEN loan approved
+                returnal = "* Loan approved *";
             }else{
                 // rule3 and rule5 are logic suport rules, reference will be the key
-                if (answerList[1] == 1){
+                if (answerList[1] == 2){
+                    returnal = "{!} Not approved. REASON: You dont have satisfying income, neither good references.";
+                }else{
                     // triggered rule6 = IF low income AND good reference THEN loan approved
                     returnal = "* Loan approved *";
-                }else{
-                    returnal = "{!} Not approved. REASON: You dont have satisfying income, neither good references.";
                 }
             }
         }
