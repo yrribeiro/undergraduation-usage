@@ -1,0 +1,100 @@
+[
+    {
+        "hasFur": "yes",
+        "outcome": "MAMMAL"
+    },
+    {
+        "produceMilk": "yes",
+        "outcome": "MAMMAL"
+    },
+    {
+        "hasFeathers": "yes",
+        "outcome": "BIRD"
+    },
+    {
+        "flies": "yes",
+        "produceEggs": "yes",
+        "outcome": "BIRD"
+    },
+    {
+        "isMammal": "yes",
+        "eatMeat": "yes",
+        "outcome": "CARNIVORE"
+    },
+    {
+        "isMammal": "yes",
+        "hasSharpTeeth": "yes",
+        "hasClaws": "yes",
+        "hasFrontalEyes": "yes",
+        "outcome": "CARNIVORE"
+    },
+    {
+        "isMammal": "yes",
+        "hasHull": "yes",
+        "outcome": "UNGULADO"
+    },
+    {
+        "isMammal": "yes",
+        "ruminate": "yes",
+        "hasEvenFingers": "yes",
+        "outcome": "UNGULADO"
+    },
+    {
+        "isCarnivore": "yes",
+        "colorToastedYellow": "yes",
+        "hasDarkSpots": "yes",
+        "outcome": "LEOPARD"
+    },
+    {
+        "isCarnivore": "yes",
+        "colorToastedYellow": "yes",
+        "hasBlackLines": "yes",
+        "outcome": "TIGER"
+    },
+    {
+        "isUngulado": "yes",
+        "hasLongLegs": "yes",
+        "hasLongNeck": "yes",
+        "colorToastedYellow": "yes",
+        "hasDarkSpots": "yes",
+        "outcome": "GIRAFFE"
+    },
+    {
+        "isUngulado": "yes",
+        "colorWhite": "yes",
+        "hasBlackLines": "yes",
+        "outcome": "ZEBRA"
+    },
+    {
+        "isBird": "yes",
+        "hasLongLegs": "yes",
+        "hasLongNeck": "yes",
+        "colorBlackWhite": "yes",
+        "outcome": "OSTRICH"
+    },
+    {
+        "isBird": "yes",
+        "flies": "no",
+        "swims": "yes",
+        "colorBlackWhite": "yes",
+        "outcome": "PENGUIN"
+    },
+    {
+        "isBird": "yes",
+        "flies": "yes",
+        "outcome": "ALBATROSS"
+    },
+    {
+        "isMammal": "yes",
+        "isCarnivore": "yes",
+        "outcome": "WOLF"
+    },
+    {
+        "isBird": "yes",
+        "colorWhite": "yes",
+        "swims": "yes",
+        "flies": "yes",
+        "outcome": "DUCK"
+    }
+]
+
