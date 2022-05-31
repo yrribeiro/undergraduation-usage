@@ -1,0 +1,34 @@
+import re
+
+messages = [
+    'Hey, @all, we have exciting news. @id45 will be your new tutor!!',
+    '@id8 we need u on the front office asap @id8',
+    'I would like to congratulate @id43, @id65 and @id3 for the exceptional results',
+    '@all theres a party going on down here in the kitchen',
+    'me and my buddy @id3 are gonna rock todays meeting'
+]
+
+members = ['@id8', '@id45', '@id3']
+
+pattern_spec = r'@id[0-9]+'
+pattern_all = r'@all'
+cits = []
+
+for msg in messages:
+    cits += list(set(re.findall(pattern_spec, msg)))
+    cits += list(set(re.findall(pattern_all, msg)))
+
+mem_db = {idx : 0 for idx in members}
+all_cit_counter = 0
+for cit in cits:
+    if cit in set(members):
+        mem_db[cit] += 1
+    if cit == '@all':
+        all_cit_counter += 1
+
+if all_cit_counter > 0:
+    for key in mem_db:
+        mem_db[key] = mem_db[key] + all_cit_counter
+cit_rank = [f'{k}={v}' for k,v in sorted(mem_db.items(), key=lambda x: x[1], reverse=True)]
+
+print(cit_rank)
