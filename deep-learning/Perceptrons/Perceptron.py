@@ -1,5 +1,10 @@
 import numpy as np
 
+# perceptron algorithm guidelines
+# -- for every input, multiply that input by its weight
+# -- sum all of the weighted inputs
+# -- compute the output of the percep. based on that sum (activation func)
+# -- adjust weights, wn = wo + a.(y-ŷ).xo
 class Perceptron():
     def __init__(self, lr=0.01, n_iters=1000) -> None:
         self.lr = lr
@@ -7,6 +12,11 @@ class Perceptron():
         self.activation_function = self._activation_func
         self.weights = None
         self.bias = None
+
+    @staticmethod
+    def score_acc(y_true, y_pred):
+        from sklearn.metrics import accuracy_score
+        return accuracy_score(y_true, y_pred)
 
     def _activation_func(self, X):
         return np.where(X>=0, 1, 0)
