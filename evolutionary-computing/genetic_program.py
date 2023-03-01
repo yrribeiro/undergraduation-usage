@@ -6,7 +6,6 @@ import random
 import operator
 import math
 
-# Define a classe de nós da árvore sintática
 class Node:
     def __init__(self, left, right, op=None, value=None):
         self.left = left
@@ -15,10 +14,10 @@ class Node:
         self.value = value
 
     def evaluate(self):
-        if self.op:
+        if isinstance(self.op, Node): return math.inf
+        if self.op and self.op.__name__ in ('add', 'sub', 'div', 'mul'):
             return self.op(self.left.evaluate(), self.right.evaluate())
-        else:
-            return self.value
+        return self.value
 
     def print_tree(self, indent=''):
         if self.op:
@@ -41,7 +40,7 @@ def create_random_tree(depth):
         right = create_random_tree(depth - 1)
         return Node(left, right, op)
     else:
-        return Node(None, None, None, random.uniform(-10, 10))
+        return Node(None, None, None, random.randint(-10, 10))
 
 def get_subtrees(node):
     subtrees = []
@@ -54,7 +53,10 @@ def get_subtrees(node):
     return subtrees
 
 def fitness(node, target):
-    return abs(node.evaluate() - target)
+    node_eval = node.evaluate()
+    if(isinstance(node_eval, (int, float))):
+      return abs(node_eval - target)
+    return 0
 
 def crossover(a, b):
     a_subtree = random.choice(get_subtrees(a))
@@ -91,16 +93,6 @@ def genetic_program(target, pop_size, max_depth, mutation_rate, crossover_rate, 
         if best_fitness == 0 or generation == max_generations - 1:
             break
 
-        # parent1 = population[roulette_wheel_selection(fitnesses)]
-        # parent2 = population[roulette_wheel_selection(fitnesses)]
-
-        # if random.random() < crossover_rate:
-        #     crossover(parent1, parent2)
-
-        # for node in population:
-        #     if random.random() < mutation_rate:
-        #         mutation(node)
-
         new_population = []
         while len(new_population) < pop_size:
             parent1 = population[roulette_wheel_selection(fitnesses)]
@@ -117,8 +109,10 @@ def genetic_program(target, pop_size, max_depth, mutation_rate, crossover_rate, 
     return best_individual
 
 if __name__ == '__main__':
+    target = 44
+    print(f'to generate number {target} you must:')
     result = genetic_program(
-        target=42,
+        target=target,
         pop_size=100,
         max_depth=5,
         mutation_rate=0.1,
