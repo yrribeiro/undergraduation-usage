@@ -131,7 +131,7 @@ def build_2d_matrix(best_structure, best_fitness):
     print(f'Molecule structure:\n{matrix}\n- Path from first atom:\n{best_structure[1][1]}\nFREE ENERGY SCORE: {best_fitness}')
 
 
-def begin_search(s, pop_size=250, max_generations=2, tournament_size=3, global_mutation_rate=0.05):
+def begin_search(s, pop_size=250, max_generations=200, tournament_size=3, global_mutation_rate=0.05):
     population = [str2matrix(s) for _ in range(pop_size)]
     nof_h_atoms = s.count('H')
     best_fitness = -1
@@ -178,5 +178,5 @@ def begin_search(s, pop_size=250, max_generations=2, tournament_size=3, global_m
 
 
 if __name__ == '__main__':
-    mol_str = 'HHPPH'
+    mol_str = 'HHPPPHHH'
     print(f'\nMolecule chain: {mol_str}\n{begin_search(mol_str)}')
