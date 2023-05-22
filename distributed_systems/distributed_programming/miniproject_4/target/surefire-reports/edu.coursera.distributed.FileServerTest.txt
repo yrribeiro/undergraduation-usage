@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: edu.coursera.distributed.FileServerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 20.117 sec <<< FAILURE! - in edu.coursera.distributed.FileServerTest
+testMissingFileGet(edu.coursera.distributed.FileServerTest)  Time elapsed: 0.004 sec  <<< ERROR!
+java.net.SocketException: Unexpected end of file from server
+	at java.base/sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:899)
+	at java.base/sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:722)
+	at java.base/sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:896)
+	at java.base/sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:722)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1615)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1520)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:527)
+	at edu.coursera.distributed.FileServerTest.sendHttpRequest(FileServerTest.java:137)
+	at edu.coursera.distributed.FileServerTest.testMissingFileGet(FileServerTest.java:244)
+
+testPerformance(edu.coursera.distributed.FileServerTest)  Time elapsed: 20.015 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: Expected parallel threads to produce at least a 9.6x improvement, but only saw 2.34525x
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at edu.coursera.distributed.FileServerTest.testPerformance(FileServerTest.java:327)
+
+testMissingNestedFileGet(edu.coursera.distributed.FileServerTest)  Time elapsed: 0.003 sec  <<< ERROR!
+java.net.SocketException: Unexpected end of file from server
+	at java.base/sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:899)
+	at java.base/sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:722)
+	at java.base/sun.net.www.http.HttpClient.parseHTTPHeader(HttpClient.java:896)
+	at java.base/sun.net.www.http.HttpClient.parseHTTP(HttpClient.java:722)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1615)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1520)
+	at java.base/java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:527)
+	at edu.coursera.distributed.FileServerTest.sendHttpRequest(FileServerTest.java:137)
+	at edu.coursera.distributed.FileServerTest.testMissingNestedFileGet(FileServerTest.java:256)
+

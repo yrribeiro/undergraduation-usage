@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: edu.coursera.concurrent.BoruvkaPerformanceTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 45.266 sec - in edu.coursera.concurrent.BoruvkaPerformanceTest

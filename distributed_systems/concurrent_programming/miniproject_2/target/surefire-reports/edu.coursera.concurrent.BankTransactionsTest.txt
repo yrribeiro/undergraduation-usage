@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: edu.coursera.concurrent.BankTransactionsTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.284 sec <<< FAILURE! - in edu.coursera.concurrent.BankTransactionsTest
+testObjectIsolation(edu.coursera.concurrent.BankTransactionsTest)  Time elapsed: 2.277 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: Expected an improvement of at least 11,200000x with object-based isolation, but saw 3,495536x
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at edu.coursera.concurrent.BankTransactionsTest.testObjectIsolation(BankTransactionsTest.java:104)
+
